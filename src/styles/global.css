@@ -1,0 +1,33 @@
+/* Main container */
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 25%;
+  background-color: #f4f4f4;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.left-sidebar {
+  /* Customize left sidebar style */
+}
+
+.right-sidebar {
+  /* Customize right sidebar style */
+}
+
+/* Main content area */
+.main-content {
+  width: 50%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
