@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './Investors.css';
 import InvestorCard from './InvestorCard';
 import InvestorModal from './InvestorModal';

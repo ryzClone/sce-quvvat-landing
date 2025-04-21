@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './News.css';
 import NewsCard from './NewsCard';
 import NewsModal from './NewModal';

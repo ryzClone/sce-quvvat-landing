@@ -1,4 +1,3 @@
-import React from 'react';
 import './Contact.css';
 import ContactForm from './ContactForm';
 import { FaTelegramPlane, FaLinkedin, FaYoutube } from 'react-icons/fa';

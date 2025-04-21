@@ -1,4 +1,3 @@
-import React from 'react';
 import './Hero.css';
 import { TypeAnimation } from 'react-type-animation';
 
