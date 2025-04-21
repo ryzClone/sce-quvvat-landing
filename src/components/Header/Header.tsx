@@ -1,60 +1,92 @@
 import './Header.css';
 import { useTranslation } from 'react-i18next';
-import { motion } from 'framer-motion'; // framer-motion importi
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
   const { t, i18n } = useTranslation();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
   };
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <header className="header">
       <div className="container">
-        {/* Logo uchun animatsiya */}
         <motion.div
           className="logo"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          initial={{ opacity: 0, y: -20 }} // boshlang‘ich holat: yuqoriga qarab
-          animate={{ opacity: 1, y: 0 }} // oxirgi holat: ko‘rinadigan va normal holat
-          transition={{ duration: 1 }} // animatsiya davomiyligi
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
         >
           SCE-QUVVAT
         </motion.div>
 
-        {/* Nav uchun animatsiya */}
-        <motion.nav
-          className="nav"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 1 }}
-        >
-          <a href="#company">{t('company')}</a>
-          <a href="#investors">{t('investors')}</a>
-          <a href="#news">{t('news')}</a>
-          <a href="#jobs">{t('vacancies')}</a>
-          <a href="#contacts">{t('contacts')}</a>
-        </motion.nav>
+        <div className="burger" onClick={toggleMenu}>
+          <span className={menuOpen ? 'open' : ''}></span>
+          <span className={menuOpen ? 'open' : ''}></span>
+          <span className={menuOpen ? 'open' : ''}></span>
+        </div>
 
-        {/* Language switcher va phone uchun animatsiya */}
+        <AnimatePresence>
+          {(menuOpen || window.innerWidth > 768) && (
+            <motion.nav
+  className={`nav ${menuOpen ? 'open' : ''}`}
+  initial={{ opacity: 0, x: 100 }}
+  animate={{ opacity: 1, x: 0 }}
+  exit={{ opacity: 0, x: 100 }}
+  transition={{ delay: 0.1, duration: 0.5 }}
+>
+  {/* CLOSE button */}
+  <button
+    onClick={() => setMenuOpen(false)}
+    style={{
+      alignSelf: 'flex-end',
+      background: 'transparent',
+      border: 'none',
+      color: '#fff',
+      fontSize: '28px',
+      cursor: 'pointer',
+      marginBottom: '20px'
+    }}
+  >
+    &times;
+  </button>
+
+  <a href="#hero" onClick={() => setMenuOpen(false)}>{t('main')}</a>
+  <a href="#company" onClick={() => setMenuOpen(false)}>{t('company')}</a>
+  <a href="#investors" onClick={() => setMenuOpen(false)}>{t('investors')}</a>
+  <a href="#news" onClick={() => setMenuOpen(false)}>{t('news')}</a>
+  <a href="#jobs" onClick={() => setMenuOpen(false)}>{t('vacancies')}</a>
+  <a href="#contacts" onClick={() => setMenuOpen(false)}>{t('contacts')}</a>
+</motion.nav>
+
+          )}
+        </AnimatePresence>
+
         <div className="right">
           <motion.div
             className="lang-switcher"
-            initial={{ opacity: 0, x: 20 }} // o'ngga siljish
-            animate={{ opacity: 1, x: 0 }} // boshlang‘ich va oxirgi holat
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1, duration: 1 }}
           >
-            <button onClick={() => changeLanguage('ru')} aria-label="Русский язык">RU</button>
-            <button onClick={() => changeLanguage('en')} aria-label="English language">EN</button>
-            <button onClick={() => changeLanguage('uz')} aria-label="O‘zbek tili">UZ</button>
+            <button onClick={() => changeLanguage('ru')}>RU</button>
+            <button onClick={() => changeLanguage('en')}>EN</button>
+            <button onClick={() => changeLanguage('uz')}>UZ</button>
           </motion.div>
 
           <motion.a
             href="tel:+998901234567"
             className="phone"
-            initial={{ opacity: 0, x: 20 }} // o'ngga siljish
-            animate={{ opacity: 1, x: 0 }} // boshlang‘ich va oxirgi holat
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.5, duration: 1 }}
           >
             +998 90 123 45 67

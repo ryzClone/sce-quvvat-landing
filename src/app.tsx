@@ -13,7 +13,6 @@ function App() {
       <Hero />
       
       <main className="main-container">
-        {/* Left Sidebar (News) */}
         <aside className="sidebar left-sidebar">
           <section id="news">
             <News />
@@ -39,7 +38,6 @@ function App() {
         </aside>
       </main>
 
-      {/* Contact bo'limini pastga qo'yamiz */}
       <Contact />
 
     </>
