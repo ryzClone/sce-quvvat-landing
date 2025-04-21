@@ -1,11 +1,12 @@
 import './Header.css';
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
   const { t, i18n } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1250);
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
@@ -14,6 +15,15 @@ const Header = () => {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 1250);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <header className="header">
@@ -35,38 +45,30 @@ const Header = () => {
         </div>
 
         <AnimatePresence>
-          {(menuOpen || window.innerWidth > 768) && (
+          {(menuOpen || !isMobile) && (
             <motion.nav
-  className={`nav ${menuOpen ? 'open' : ''}`}
-  initial={{ opacity: 0, x: 100 }}
-  animate={{ opacity: 1, x: 0 }}
-  exit={{ opacity: 0, x: 100 }}
-  transition={{ delay: 0.1, duration: 0.5 }}
->
-  {/* CLOSE button */}
-  <button
-    onClick={() => setMenuOpen(false)}
-    style={{
-      alignSelf: 'flex-end',
-      background: 'transparent',
-      border: 'none',
-      color: '#fff',
-      fontSize: '28px',
-      cursor: 'pointer',
-      marginBottom: '20px'
-    }}
-  >
-    &times;
-  </button>
+              className={`nav ${menuOpen ? 'open' : ''}`}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 100 }}
+              transition={{ delay: 0.1, duration: 0.5 }}
+            >
+              {isMobile && (
+                <button
+                  onClick={() => setMenuOpen(false)}
+                  className="close-button"
+                >
+                  &times;
+                </button>
+              )}
 
-  <a href="#hero" onClick={() => setMenuOpen(false)}>{t('main')}</a>
-  <a href="#company" onClick={() => setMenuOpen(false)}>{t('company')}</a>
-  <a href="#investors" onClick={() => setMenuOpen(false)}>{t('investors')}</a>
-  <a href="#news" onClick={() => setMenuOpen(false)}>{t('news')}</a>
-  <a href="#jobs" onClick={() => setMenuOpen(false)}>{t('vacancies')}</a>
-  <a href="#contacts" onClick={() => setMenuOpen(false)}>{t('contacts')}</a>
-</motion.nav>
-
+              <a href="#hero" onClick={() => setMenuOpen(false)}>{t('main')}</a>
+              <a href="#company" onClick={() => setMenuOpen(false)}>{t('company')}</a>
+              <a href="#investors" onClick={() => setMenuOpen(false)}>{t('investors')}</a>
+              <a href="#news" onClick={() => setMenuOpen(false)}>{t('news')}</a>
+              <a href="#jobs" onClick={() => setMenuOpen(false)}>{t('vacancies')}</a>
+              <a href="#contacts" onClick={() => setMenuOpen(false)}>{t('contacts')}</a>
+            </motion.nav>
           )}
         </AnimatePresence>
 

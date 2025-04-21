@@ -27,7 +27,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 100%;
+  max-width: 95%;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -152,6 +152,16 @@ body {
   transform: translateY(-7.5px) rotate(-45deg);
 }
 
+.close_button{
+  display: none;
+  align-self: 'flex-end';
+  background: 'transparent';
+  border: 'none';
+  color: '#fff';
+  font-size: '28px';
+  cursor: 'pointer';
+  margin-bottom: 20px;
+}
 /* Sidebar styles for small screens */
 
 @media (max-width: 1250px) {
@@ -170,7 +180,7 @@ body {
     align-items: flex-start; /* Menyu elementlari chapdan boshlanadi */
     padding: 80px 24px;
     gap: 24px;
-    transition: right 0.3s ease; /* Menyuni yon tomondan harakatlantirish */
+    transition: right .3s ease; /* Menyuni yon tomondan harakatlantirish */
     z-index: 999;
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2); /* Menyu yonida soya qo‘shish */
   }
@@ -178,6 +188,10 @@ body {
   /* Menyu ochilganda */
   .nav.open {
     right: 0; /* Menyu o‘ngga to‘liq chiqadi */
+  }
+
+  .nav.open .close-button {
+    display: block;
   }
 
   /* O‘ng tomondagi panel (mobilda, bu hide qilinadi) */
@@ -201,17 +215,18 @@ body {
   }
 
   /* Yopish tugmasi */
-  .nav button {
+  .nav .close-button {
     background: transparent;
     border: none;
     color: #fff;
     font-size: 50px;
     cursor: pointer;
     margin-bottom: 20px;
-    align-self: flex-end; /* Yopish tugmasi yuqori o‘ngda */
+    align-self: flex-end;
     position: absolute;
     top: 20px;
     right: 20px;
+    display: none;
   }
 
   /* Ekraning qolgan qismini qora qilish (yopilgan menyu fonini yaratish) */
