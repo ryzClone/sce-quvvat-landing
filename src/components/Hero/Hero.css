@@ -9,6 +9,7 @@
   justify-content: flex-start;
   overflow: hidden;
   animation: bgZoom 15s ease-in-out infinite alternate;
+  transition: height 0.3s ease;
 }
 
 @keyframes bgZoom {
@@ -29,14 +30,16 @@
   justify-content: flex-start;
   padding-left: 10%;
   animation: fadeOverlay 2s ease;
+  transition: padding 0.3s ease;
 }
 
 .hero-content {
   border-radius: 20px;
   padding: 50px;
   color: #ffffff;
-  min-width: 500px;
+  max-width: 700px;
   animation: slideIn 1.3s ease-out;
+  transition: padding 0.3s ease, text-align 0.3s ease;
 }
 
 .hero h1 {
@@ -78,7 +81,7 @@
   box-shadow: 0 10px 24px rgba(0, 242, 254, 0.5);
 }
 
-/* Animatsiyalar */
+/* Animations */
 @keyframes slideIn {
   0% {
     opacity: 0;
@@ -110,21 +113,45 @@
   }
 }
 
-/* Responsiv */
-@media (max-width: 768px) {
+/* RESPONSIVE HERO HEIGHT */
+@media (min-width: 1600px) {
   .hero {
+    height: 100vh;
+  }
+}
+
+@media (min-width: 1250px) and (max-width: 1599px) {
+  .hero {
+    height: 100vh;
+  }
+}
+
+@media (max-width: 1249px) {
+  .hero {
+    height: 75vh;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    height: 70vh;
     justify-content: center;
-    padding-left: 0;
-    text-align: center;
   }
 
   .overlay {
+    padding-left: 0;
     justify-content: center;
   }
 
   .hero-content {
-    padding: 30px;
+    padding: 40px;
     text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 60vh;
   }
 
   .hero h1 {
@@ -138,5 +165,28 @@
   .hero-button {
     padding: 12px 28px;
     font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 50vh;
+  }
+
+  .hero-content {
+    padding: 30px;
+  }
+
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+  }
+
+  .hero-button {
+    padding: 10px 24px;
+    font-size: 0.9rem;
   }
 }
